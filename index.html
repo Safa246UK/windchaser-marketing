@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WindChaser — Kitesurf alerts for your spot, your schedule</title>
+    <meta name="description" content="Personalised kitesurf alerts. Set your spot, set your schedule, get notified only when conditions are right for you.">
+    <link rel="icon" href="https://app.windchaser.info/static/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 5rem 0; }
+
+        :root {
+            --blue:       #0d6efd;
+            --blue-dark:  #0a58ca;
+            --blue-light: #e8f0fe;
+            --text:       #1a1a2e;
+            --muted:      #555;
+            --border:     #dee2e6;
+            --bg-light:   #f8f9fb;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.9rem 0;
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-weight: 800; font-size: 1.2rem; color: var(--blue);
+        }
+        .nav-logo img { width: 32px; height: 32px; }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-block; padding: 0.6rem 1.4rem;
+            border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.2s; border: none;
+        }
+        .btn-primary { background: var(--blue); color: white; }
+        .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(13,110,253,0.35); }
+        .btn-lg { padding: 0.85rem 2rem; font-size: 1.05rem; border-radius: 10px; }
+        .btn-outline { border: 2px solid rgba(255,255,255,0.7); color: white; background: transparent; }
+        .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+        .btn-white { background: white; color: var(--blue); }
+        .btn-white:hover { background: #f0f4ff; transform: translateY(-1px); }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #0d6efd 0%, #0056d2 50%, #003a8c 100%);
+            color: white; padding: 6rem 0 5rem; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero > * { position: relative; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+            color: white; padding: 0.35rem 1rem; border-radius: 100px;
+            font-size: 0.85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: 0.02em;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800;
+            line-height: 1.12; margin-bottom: 1.25rem; letter-spacing: -0.02em;
+        }
+        .hero h1 em { font-style: normal; opacity: 0.8; }
+        .hero > .container > p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem); opacity: 0.9;
+            max-width: 580px; margin: 0 auto 2.5rem;
+        }
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .hero-proof {
+            margin-top: 2.5rem; opacity: 0.65; font-size: 0.85rem;
+            display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+        }
+        .hero-proof span::before { content: '✓  '; }
+
+        /* ── Section labels ── */
+        .section-label {
+            text-transform: uppercase; letter-spacing: 0.1em;
+            font-size: 0.78rem; font-weight: 600; color: var(--blue); margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 800;
+            line-height: 1.18; margin-bottom: 1rem; letter-spacing: -0.02em;
+        }
+        .section-sub {
+            color: var(--muted); font-size: 1.05rem;
+            max-width: 600px; margin-bottom: 3rem;
+        }
+
+        /* ── Audience cards ── */
+        .audience { background: var(--bg-light); }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+        }
+        .card {
+            background: white; border-radius: 14px; padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .card p { font-size: 0.9rem; color: var(--muted); }
+
+        /* ── How it works ── */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; position: relative;
+        }
+        .step { text-align: center; padding: 1rem; }
+        .step-num {
+            width: 56px; height: 56px; background: var(--blue); color: white;
+            border-radius: 50%; font-size: 1.4rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.25rem; box-shadow: 0 4px 14px rgba(13,110,253,0.3);
+        }
+        .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .step p { color: var(--muted); font-size: 0.95rem; }
+
+        /* ── Screenshots ── */
+        .screenshots { background: var(--bg-light); }
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .screenshot-frame {
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid var(--border);
+        }
+        .screenshot-label {
+            background: #fff; padding: 0.65rem 1rem;
+            font-size: 0.85rem; font-weight: 600; color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+        .screenshot-frame img {
+            width: 100%; display: block;
+        }
+        @media (max-width: 560px) {
+            .screenshots-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Pricing ── */
+        .pricing { }
+        .pricing-card {
+            background: white; border-radius: 20px; padding: 3rem 2.5rem;
+            box-shadow: 0 4px 28px rgba(13,110,253,0.15);
+            max-width: 520px; margin: 0 auto; text-align: center;
+            border: 2px solid var(--blue); position: relative;
+        }
+        .pricing-badge {
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--blue); color: white;
+            padding: 0.3rem 1.2rem; border-radius: 100px;
+            font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+        }
+        .price {
+            font-size: 4rem; font-weight: 800; color: var(--blue);
+            line-height: 1; margin: 1.5rem 0 0.25rem;
+        }
+        .price sup { font-size: 1.6rem; vertical-align: top; margin-top: 0.8rem; }
+        .price-period { color: var(--muted); font-size: 1rem; margin-bottom: 1.5rem; }
+        .pricing-promise {
+            background: var(--blue-light); border-radius: 10px;
+            padding: 1rem 1.25rem; font-size: 0.92rem; color: #0a58ca;
+            margin: 1.5rem 0; font-style: italic; line-height: 1.6;
+        }
+        .pricing-features { list-style: none; text-align: left; margin: 1.5rem 0 2rem; }
+        .pricing-features li {
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            font-size: 0.95rem; color: var(--muted); margin-bottom: 0.75rem;
+        }
+        .pricing-features li::before { content: '✓'; color: #28a745; font-weight: 700; flex-shrink: 0; }
+
+        /* ── Creator ── */
+        .creator { background: var(--bg-light); }
+        .creator-card {
+            background: white; border-radius: 20px; padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid var(--border);
+            display: flex; gap: 2rem; align-items: flex-start;
+        }
+        .creator-img {
+            width: 150px; height: 150px; object-fit: cover;
+            border-radius: 12px; flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+        .creator-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+        .creator-text p:last-child { margin-bottom: 0; }
+
+        /* ── Final CTA ── */
+        .final-cta {
+            background: linear-gradient(135deg, #0d6efd 0%, #003a8c 100%);
+            color: white; text-align: center; padding: 5.5rem 0;
+        }
+        .final-cta h2 {
+            font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800;
+            margin-bottom: 0.75rem; letter-spacing: -0.02em;
+        }
+        .final-cta p { opacity: 0.85; font-size: 1.1rem; margin-bottom: 2.5rem; }
+
+        /* ── Footer ── */
+        footer {
+            background: #080818; color: rgba(255,255,255,0.45);
+            text-align: center; padding: 1.75rem 0; font-size: 0.85rem;
+        }
+        footer a { color: rgba(255,255,255,0.65); }
+        footer a:hover { color: white; }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .section { padding: 3.5rem 0; }
+            .creator-card { flex-direction: column; align-items: center; text-align: center; }
+            .creator-img { width: 120px; height: 120px; }
+            .pricing-card { padding: 2.5rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="container nav-inner">
+        <div class="nav-logo">
+            <img src="https://app.windchaser.info/static/icon-192.png" alt="WindChaser icon">
+            WindChaser
+        </div>
+        <a href="https://app.windchaser.info" class="btn btn-primary">Open the App →</a>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">🪁 Personalised kitesurf alerts</div>
+        <h1>Only get alerted<br><em>when you can actually ride.</em></h1>
+        <p>Alerts for your spot, your schedule, and your session window. Not every forecast — just the ones that matter to you.</p>
+        <div class="hero-cta">
+            <a href="https://app.windchaser.info/register" class="btn btn-primary btn-lg">Start free trial →</a>
+            <a href="https://app.windchaser.info" class="btn btn-outline btn-lg">Sign in</a>
+        </div>
+        <div class="hero-proof">
+            <span>Free trial — no card needed to start</span>
+            <span>No ads. Ever.</span>
+            <span>£3/month</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── AUDIENCE ── -->
+<section class="section audience">
+    <div class="container">
+        <div class="section-label">Built for real life</div>
+        <div class="section-title">Busy life. Better kite alerts.</div>
+        <p class="section-sub">Most forecast apps assume you're free whenever the wind blows. WindChaser knows your schedule — and only alerts you when both align.</p>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3>Weekend-only kiters</h3>
+                <p>No more midweek alerts for sessions you can't make. We'll alert you when it matters — on the days you're actually free.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌅</div>
+                <h3>After-work riders</h3>
+                <p>Tell us your window — evenings only, mornings only — and we'll match the forecast to fit your life.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👨‍👩‍👧</div>
+                <h3>Parents &amp; busy people</h3>
+                <p>Constrained schedules shouldn't mean missed sessions. Set the times you can get away and leave the rest to us.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌊</div>
+                <h3>Your spot, your rules</h3>
+                <p>Define your own wind range, preferred directions, and tide window. Not every kiter is the same — your alerts shouldn't be either.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Lapsed riders</h3>
+                <p>Been out of the water a while? One well-timed alert is all it takes to get you back on the water.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏖️</div>
+                <h3>Multi-spot riders</h3>
+                <p>Follow multiple beaches, each with its own wind range, tide settings, and season window.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section">
+    <div class="container">
+        <div class="section-label">How it works</div>
+        <div class="section-title">Three steps to the right alert</div>
+        <p class="section-sub">No app store needed. Works on any device. Install on your home screen for push notifications.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Set your spot</h3>
+                <p>Add your local kite beach. Set your preferred wind speed range, direction, and tide window. Each spot is tuned to how you ride it.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Set your schedule</h3>
+                <p>Tell us when you're available — mornings, evenings, weekends. A simple 7-day grid. We only alert you when the forecast matches your free time.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Get the right alerts</h3>
+                <p>Every morning at 7am, WindChaser checks the forecast for your spots against your schedule. Conditions line up — you hear about it. If not — silence.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── SCREENSHOTS ── -->
+<section class="section screenshots">
+    <div class="container">
+        <div class="section-label">See it in action</div>
+        <div class="section-title">Everything you need, nothing you don't</div>
+        <p class="section-sub">A 7-day colour-coded forecast personalised to your wind settings, a dashboard showing all your spots at a glance, and a spot setup that takes minutes.</p>
+        <div class="screenshots-grid">
+            <div class="screenshot-frame">
+                <div class="screenshot-label">📊 7-day forecast table</div>
+                <img src="screenshot-forecast.jpg" alt="7-day personalised forecast table">
+            </div>
+            <div class="screenshot-frame">
+                <div class="screenshot-label">🏄 My Spots dashboard</div>
+                <img src="screenshot-dashboard.jpg" alt="My Spots dashboard showing good hours per day">
+            </div>
+            <div class="screenshot-frame">
+                <div class="screenshot-label">📍 Adding a spot — pin it on the map</div>
+                <img src="screenshot-addspot-map.jpg" alt="Adding a new kite spot with map and wind direction compass">
+            </div>
+            <div class="screenshot-frame">
+                <div class="screenshot-label">⚙️ Adding a spot — set your conditions</div>
+                <img src="screenshot-addspot-form.jpg" alt="Setting tide, season and wind preferences for a new spot">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section pricing">
+    <div class="container">
+        <div class="section-label" style="text-align:center">Pricing</div>
+        <div class="section-title" style="text-align:center">Less than a coffee. No ads. Ever.</div>
+        <p class="section-sub" style="margin: 0 auto 3rem; text-align:center">A simple promise: WindChaser will never cost you more than a single cup of coffee at Ken's local coffee shop. That's it.</p>
+        <div class="pricing-card">
+            <div class="pricing-badge">☕ The coffee promise</div>
+            <p style="color: var(--muted); margin-top: 1rem; font-size: 0.95rem;">Everything included. One simple price.</p>
+            <div class="price"><sup>£</sup>3</div>
+            <div class="price-period">per month &nbsp;·&nbsp; cancel any time</div>
+            <div class="pricing-promise">
+                "It will <strong>NEVER</strong> cost you more a month than a single cup of coffee at my local coffee shop. And it will <strong>NEVER</strong> be infested with ads."
+                <br><br>— Ken, creator of WindChaser
+            </div>
+            <ul class="pricing-features">
+                <li>Your own kite spots with personalised settings</li>
+                <li>7-day forecast with wind, gusts, direction &amp; tides</li>
+                <li>Daily alerts matched to your availability schedule</li>
+                <li>Push notifications + email — your choice</li>
+                <li>Tide data for UK beaches</li>
+                <li>Zero ads &nbsp;·&nbsp; zero data selling &nbsp;·&nbsp; ever</li>
+            </ul>
+            <a href="https://app.windchaser.info/register" class="btn btn-primary btn-lg" style="width: 100%; display: block; text-align: center;">
+                Start your free trial →
+            </a>
+            <p style="margin-top: 0.9rem; font-size: 0.82rem; color: var(--muted);">Free trial included &nbsp;·&nbsp; No card needed to get started</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── CREATOR ── -->
+<section class="section creator">
+    <div class="container">
+        <div class="section-label">From the creator</div>
+        <div class="section-title">Why I built this</div>
+        <div class="creator-card">
+            <img src="https://app.windchaser.info/static/Ken%20Kiting.jpg" alt="Ken kitesurfing" class="creator-img">
+            <div class="creator-text">
+                <p>Hi. My name is Ken, and I am the creator of WindChaser. It started as a passion project, just for me. I live on the North East coast in England, and the wind blows offshore almost all of the time — so much so that I gave up scanning weather apps.</p>
+                <p>And then one day I went for a walk on the beach and the wind was stonking onshore, the lagoons were perfect and the sun was shining. And I <em>almost missed a fantastic session</em>. So I thought — an app that alerts me when the conditions are right would be great.</p>
+                <p>Building it turned out to be more complex than I expected. But I made two commitments when I started, and I'm keeping them: <strong>no ads, ever</strong> — and it will never cost more than a cup of coffee a month.</p>
+                <p>Questions, suggestions, or just want to say hello? <a href="mailto:admin@windchaser.info" style="color: var(--blue); font-weight: 600;">admin@windchaser.info</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Your beach. Your wind rules.<br>Your availability.</h2>
+        <p>Join kiters who've stopped checking forecast apps and started just getting the right alert.</p>
+        <a href="https://app.windchaser.info/register" class="btn btn-white btn-lg">Create your account →</a>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="container">
+        <p>
+            © 2026 WindChaser &nbsp;·&nbsp; Built by Ken Hampton &nbsp;·&nbsp;
+            <a href="https://app.windchaser.info">app.windchaser.info</a> &nbsp;·&nbsp;
+            <a href="mailto:admin@windchaser.info">admin@windchaser.info</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
