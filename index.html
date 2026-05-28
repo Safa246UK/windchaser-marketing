@@ -143,24 +143,34 @@
         .screenshots { background: var(--bg-light); }
         .screenshots-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            max-width: 560px;
+            max-width: 960px;
             margin: 0 auto;
         }
         .screenshot-frame {
             border-radius: 16px; overflow: hidden;
             box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid var(--border);
-        }
-        .screenshot-label {
-            background: #fff; padding: 0.65rem 1rem;
-            font-size: 0.85rem; font-weight: 600; color: var(--muted);
-            border-bottom: 1px solid var(--border);
+            background: white;
+            display: flex; flex-direction: column;
         }
         .screenshot-frame img {
             width: 100%; display: block;
         }
-        @media (max-width: 560px) {
+        .screenshot-caption {
+            padding: 0.75rem 1rem 1rem;
+        }
+        .screenshot-caption strong {
+            font-size: 0.88rem; font-weight: 700; color: var(--text);
+            display: block; margin-bottom: 0.3rem;
+        }
+        .screenshot-caption p {
+            font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin: 0;
+        }
+        @media (max-width: 720px) {
+            .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 460px) {
             .screenshots-grid { grid-template-columns: 1fr; }
         }
 
@@ -342,23 +352,70 @@
     <div class="container">
         <div class="section-label">See it in action</div>
         <div class="section-title">Everything you need, nothing you don't</div>
-        <p class="section-sub">A 7-day colour-coded forecast personalised to your wind settings, a dashboard showing all your spots at a glance, and a spot setup that takes minutes.</p>
+        <p class="section-sub">From lock screen alert to detailed forecast, spot chat to kite size recommendation — here's what WindChaser looks like in the wild.</p>
         <div class="screenshots-grid">
             <div class="screenshot-frame">
-                <div class="screenshot-label">📊 7-day forecast table</div>
-                <img src="screenshot-forecast.jpg" alt="7-day personalised forecast table">
+                <img src="ss1-notification.jpg" alt="WindChaser push notification on lock screen">
+                <div class="screenshot-caption">
+                    <strong>🔔 Lock screen alert</strong>
+                    <p>Push alerts land on your lock screen the moment conditions line up — no need to check the forecast yourself.</p>
+                </div>
             </div>
             <div class="screenshot-frame">
-                <div class="screenshot-label">🏄 My Spots dashboard</div>
-                <img src="screenshot-dashboard.jpg" alt="My Spots dashboard showing good hours per day">
+                <img src="ss2-email.jpg" alt="WindChaser alert email showing good kiting conditions">
+                <div class="screenshot-caption">
+                    <strong>📧 Alert email</strong>
+                    <p>Email alerts give you the full picture: spot name, wind speed and direction, and exactly how many good hours to expect — and when they start.</p>
+                </div>
             </div>
             <div class="screenshot-frame">
-                <div class="screenshot-label">📍 Adding a spot — pin it on the map</div>
-                <img src="screenshot-addspot-map.jpg" alt="Adding a new kite spot with map and wind direction compass">
+                <img src="ss3-myspots.jpg" alt="My Spots dashboard showing hours of good conditions">
+                <div class="screenshot-caption">
+                    <strong>🏄 My Spots dashboard</strong>
+                    <p>Your spots at a glance — colour-coded hours of good conditions across today, tomorrow, and the day after. Green means go.</p>
+                </div>
             </div>
             <div class="screenshot-frame">
-                <div class="screenshot-label">⚙️ Adding a spot — set your conditions</div>
-                <img src="screenshot-addspot-form.jpg" alt="Setting tide, season and wind preferences for a new spot">
+                <img src="ss4-forecast.jpg" alt="7-day hourly forecast table for a kite spot">
+                <div class="screenshot-caption">
+                    <strong>📊 7-day forecast</strong>
+                    <p>Wind speed, gusts, direction, recommended kite size, tide height, waves, and temperature — all colour-coded to your personal settings.</p>
+                </div>
+            </div>
+            <div class="screenshot-frame">
+                <img src="ss5-compass.jpg" alt="Wind direction compass and spot location map">
+                <div class="screenshot-caption">
+                    <strong>🧭 Wind direction compass</strong>
+                    <p>Set which directions work at your spot across four tiers: Perfect, Good, Poor, and Dangerous. The forecast is scored against your settings, not a generic average.</p>
+                </div>
+            </div>
+            <div class="screenshot-frame">
+                <img src="ss6-chat.jpg" alt="Spot community chat room">
+                <div class="screenshot-caption">
+                    <strong>💬 Spot chat</strong>
+                    <p>Each spot has its own community chat. Share real conditions, coordinate sessions, and connect with local riders.</p>
+                </div>
+            </div>
+            <div class="screenshot-frame">
+                <img src="ss7-spotsmap.jpg" alt="Map of community kite spots around the UK">
+                <div class="screenshot-caption">
+                    <strong>🗺️ Kite spots map</strong>
+                    <p>Browse a growing map of community-contributed kite spots around the UK coastline, or add your own favourite beach.</p>
+                </div>
+            </div>
+            <div class="screenshot-frame">
+                <img src="ss8-profile.jpg" alt="User profile with weight, wind range and availability settings">
+                <div class="screenshot-caption">
+                    <strong>⚙️ Your profile</strong>
+                    <p>Set your weight for accurate kite size recommendations, your wind range, and exactly which mornings, afternoons, and evenings you're free to kite.</p>
+                </div>
+            </div>
+            <div class="screenshot-frame">
+                <img src="ss9-help.jpg" alt="WindChaser in-app help page">
+                <div class="screenshot-caption">
+                    <strong>🆘 Built-in help</strong>
+                    <p>In-app help covers everything from setting up alerts and installing on your home screen to adding new spots and understanding the forecast.</p>
+                </div>
             </div>
         </div>
     </div>
