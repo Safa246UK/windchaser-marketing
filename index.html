@@ -4,8 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WindChaser — Kitesurf alerts for your spot, your schedule</title>
-    <meta name="description" content="Personalised kitesurf alerts. Set your spot, set your schedule, get notified only when conditions are right for you.">
+    <meta name="description" content="Personalised kitesurf forecast alerts for UK spots. Set your wind preferences and schedule — get notified only when conditions line up. £3/month. No ads. Ever.">
+    <link rel="canonical" href="https://www.windchaser.info">
     <link rel="icon" href="https://app.windchaser.info/static/icon-192.png">
+
+    <!-- Open Graph (controls link previews on WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.windchaser.info">
+    <meta property="og:site_name" content="WindChaser">
+    <meta property="og:title" content="WindChaser — Kitesurf alerts for your spot, your schedule">
+    <meta property="og:description" content="Personalised kitesurf forecast alerts for UK spots. Set your wind preferences and schedule — get notified only when conditions line up. £3/month. No ads. Ever.">
+    <meta property="og:image" content="https://www.windchaser.info/ss3-myspots.jpg">
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WindChaser — Kitesurf alerts for your spot, your schedule">
+    <meta name="twitter:description" content="Personalised kitesurf forecast alerts for UK spots. Set your wind preferences and schedule — get notified only when conditions line up. £3/month. No ads. Ever.">
+    <meta name="twitter:image" content="https://www.windchaser.info/ss3-myspots.jpg">
+
+    <!-- Schema.org: SoftwareApplication (enables rich results in Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "WindChaser",
+      "description": "Personalised kitesurf forecast alerts for UK spots. Set your wind preferences and schedule — get alerted only when conditions line up.",
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "3.00",
+        "priceCurrency": "GBP"
+      },
+      "url": "https://app.windchaser.info",
+      "author": {
+        "@type": "Person",
+        "name": "Ken Hampton"
+      }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -86,6 +123,10 @@
             max-width: 580px; margin: 0 auto 2.5rem;
         }
         .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .hero-sub {
+            font-size: 1rem; font-weight: 500; opacity: 0.75;
+            margin-bottom: 2rem; letter-spacing: 0.01em;
+        }
         .hero-proof {
             margin-top: 2.5rem; opacity: 0.65; font-size: 0.85rem;
             display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
@@ -295,6 +336,7 @@
     <div class="container">
         <div class="hero-badge">🪁 Personalised kitesurf alerts</div>
         <h1>Only get alerted<br><em>when you can actually ride.</em></h1>
+        <p class="hero-sub">Personalised kitesurf forecast alerts for your favourite UK spots</p>
         <p>Alerts for your spot, your schedule, and your session window. Not every forecast — just the ones that matter to you.</p>
         <div class="hero-cta">
             <a href="https://app.windchaser.info/register" class="btn btn-primary btn-lg">Start free trial →</a>
