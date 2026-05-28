@@ -168,10 +168,11 @@
             font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin: 0;
         }
         @media (max-width: 720px) {
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+            .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         }
         @media (max-width: 460px) {
-            .screenshots-grid { grid-template-columns: 1fr; }
+            .screenshots-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .screenshot-frame img { max-height: 55vh; width: auto; margin: 0 auto; }
         }
 
         /* ── Pricing ── */
