@@ -149,13 +149,40 @@
             margin: 0 auto;
         }
         .screenshot-frame {
-            border-radius: 16px; overflow: hidden;
+            border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid var(--border);
             background: white;
             display: flex; flex-direction: column;
+            padding: 0.85rem 0.85rem 0;
         }
-        .screenshot-frame img {
+        .phone-wrap {
+            background: #1c1c1e;
+            border-radius: 28px;
+            padding: 12px 8px 14px;
+            box-shadow: inset 0 0 0 1.5px #3d3d3f, 0 4px 16px rgba(0,0,0,0.25);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .phone-wrap::before {
+            content: '';
+            display: block;
+            width: 46px; height: 5px;
+            background: #3d3d3f;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+        .phone-wrap::after {
+            content: '';
+            display: block;
+            width: 32px; height: 4px;
+            background: #3d3d3f;
+            border-radius: 2px;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+        .phone-wrap img {
             width: 100%; display: block;
+            border-radius: 18px;
         }
         .screenshot-caption {
             padding: 0.75rem 1rem 1rem;
@@ -172,7 +199,7 @@
         }
         @media (max-width: 460px) {
             .screenshots-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .screenshot-frame img { max-height: 55vh; width: auto; margin: 0 auto; }
+            .phone-wrap img { max-height: 55vh; width: auto; }
         }
 
         /* ── Pricing ── */
@@ -356,63 +383,81 @@
         <p class="section-sub">From lock screen alert to detailed forecast, spot chat to kite size recommendation — here's what WindChaser looks like in the wild.</p>
         <div class="screenshots-grid">
             <div class="screenshot-frame">
-                <img src="ss1-notification.jpg" alt="WindChaser push notification on lock screen">
+                <div class="phone-wrap">
+                    <img src="ss1-notification.jpg" alt="WindChaser push notification on lock screen">
+                </div>
                 <div class="screenshot-caption">
                     <strong>🔔 Lock screen alert</strong>
                     <p>Push alerts land on your lock screen the moment conditions line up — no need to check the forecast yourself.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss2-email.jpg" alt="WindChaser alert email showing good kiting conditions">
+                <div class="phone-wrap">
+                    <img src="ss2-email.jpg" alt="WindChaser alert email showing good kiting conditions">
+                </div>
                 <div class="screenshot-caption">
                     <strong>📧 Alert email</strong>
                     <p>Email alerts give you the full picture: spot name, wind speed and direction, and exactly how many good hours to expect — and when they start.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss3-myspots.jpg" alt="My Spots dashboard showing hours of good conditions">
+                <div class="phone-wrap">
+                    <img src="ss3-myspots.jpg" alt="My Spots dashboard showing hours of good conditions">
+                </div>
                 <div class="screenshot-caption">
                     <strong>🏄 My Spots dashboard</strong>
                     <p>Your spots at a glance — colour-coded hours of good conditions across today, tomorrow, and the day after. Green means go.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss4-forecast.jpg" alt="7-day hourly forecast table for a kite spot">
+                <div class="phone-wrap">
+                    <img src="ss4-forecast.jpg" alt="7-day hourly forecast table for a kite spot">
+                </div>
                 <div class="screenshot-caption">
                     <strong>📊 7-day forecast</strong>
                     <p>Wind speed, gusts, direction, recommended kite size, tide height, waves, and temperature — all colour-coded to your personal settings.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss5-compass.jpg" alt="Wind direction compass and spot location map">
+                <div class="phone-wrap">
+                    <img src="ss5-compass.jpg" alt="Wind direction compass and spot location map">
+                </div>
                 <div class="screenshot-caption">
                     <strong>🧭 Wind direction compass</strong>
                     <p>Set which directions work at your spot across four tiers: Perfect, Good, Poor, and Dangerous. The forecast is scored against your settings, not a generic average.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss6-chat.jpg" alt="Spot community chat room">
+                <div class="phone-wrap">
+                    <img src="ss6-chat.jpg" alt="Spot community chat room">
+                </div>
                 <div class="screenshot-caption">
                     <strong>💬 Spot chat</strong>
                     <p>Each spot has its own community chat. Share real conditions, coordinate sessions, and connect with local riders.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss7-spotsmap.jpg" alt="Map of community kite spots around the UK">
+                <div class="phone-wrap">
+                    <img src="ss7-spotsmap.jpg" alt="Map of community kite spots around the UK">
+                </div>
                 <div class="screenshot-caption">
                     <strong>🗺️ Kite spots map</strong>
                     <p>Browse a growing map of community-contributed kite spots around the UK coastline, or add your own favourite beach.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss8-profile.jpg" alt="User profile with weight, wind range and availability settings">
+                <div class="phone-wrap">
+                    <img src="ss8-profile.jpg" alt="User profile with weight, wind range and availability settings">
+                </div>
                 <div class="screenshot-caption">
                     <strong>⚙️ Your profile</strong>
                     <p>Set your weight for accurate kite size recommendations, your wind range, and exactly which mornings, afternoons, and evenings you're free to kite.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
-                <img src="ss9-help.jpg" alt="WindChaser in-app help page">
+                <div class="phone-wrap">
+                    <img src="ss9-help.jpg" alt="WindChaser in-app help page">
+                </div>
                 <div class="screenshot-caption">
                     <strong>🆘 Built-in help</strong>
                     <p>In-app help covers everything from setting up alerts and installing on your home screen to adding new spots and understanding the forecast.</p>
