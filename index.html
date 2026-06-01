@@ -148,6 +148,15 @@
             max-width: 600px; margin-bottom: 3rem;
         }
 
+        /* ── Video intro ── */
+        .video-card {
+            max-width: 780px; margin: 0 auto;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid var(--border);
+            background: #000;
+        }
+        .video-card video { width: 100%; display: block; }
+
         /* ── Audience cards ── */
         .audience { background: var(--bg-light); }
         .cards-grid {
@@ -347,6 +356,20 @@
             <span>Free trial — no card needed to start</span>
             <span>No ads. Ever.</span>
             <span>£3/month</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── VIDEO INTRO ── -->
+<section class="section">
+    <div class="container">
+        <div class="section-label" style="text-align:center">Watch</div>
+        <div class="section-title" style="text-align:center">Brief video intro</div>
+        <div class="video-card">
+            <video controls preload="metadata">
+                <source src="Windchaser%20Intro%20Vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 </section>
