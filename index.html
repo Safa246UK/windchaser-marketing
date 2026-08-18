@@ -83,19 +83,12 @@
         .nav-logo img { width: 32px; height: 32px; }
         .nav-right { display: flex; align-items: center; gap: 1rem; }
 
-        /* ── Google Translate widget ── */
-        #google_translate_element { display: flex; align-items: center; }
-        .goog-te-gadget { font-family: 'Inter', sans-serif !important; font-size: 0 !important; }
-        .goog-te-gadget-simple {
-            display: flex !important; align-items: center; gap: 0.4rem;
-            font-family: 'Inter', sans-serif !important; font-size: 0.85rem !important; font-weight: 600 !important;
-            color: var(--text) !important; background: #fff !important; cursor: pointer;
-            border: 1px solid var(--border) !important; border-radius: 8px !important;
-            padding: 0.5rem 0.9rem !important; box-shadow: none !important;
+        /* ── Google Translate widget: kept off-screen, only its automatic
+               "translate this page?" banner is shown to visitors ── */
+        #google_translate_element {
+            position: absolute !important; left: -9999px !important; top: -9999px !important;
+            width: 1px !important; height: 1px !important; overflow: hidden !important;
         }
-        .goog-te-gadget-simple .goog-te-gadget-icon { display: none !important; }
-        .goog-te-gadget-simple span { color: var(--text) !important; }
-        .goog-te-gadget-simple::before { content: '🌐'; font-size: 0.95rem; }
         body { top: 0px !important; position: static !important; }
 
         /* ── Buttons ── */
@@ -354,7 +347,7 @@
             WindChaser
         </div>
         <div class="nav-right">
-            <div id="google_translate_element"></div>
+            <div id="google_translate_element" aria-hidden="true"></div>
             <a href="https://app.windchaser.info" class="btn btn-primary">Open the App →</a>
         </div>
     </div>
@@ -624,7 +617,7 @@
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'en',
-            autoDisplay: false,
+            autoDisplay: true,
             layout: google.translate.TranslateElement.InlineLayout.SIMPLE
         }, 'google_translate_element');
     }
