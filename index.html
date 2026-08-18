@@ -86,12 +86,16 @@
         /* ── Google Translate widget ── */
         #google_translate_element { display: flex; align-items: center; }
         .goog-te-gadget { font-family: 'Inter', sans-serif !important; font-size: 0 !important; }
-        .goog-te-gadget .goog-te-combo {
-            font-family: 'Inter', sans-serif; font-size: 0.85rem;
-            padding: 0.45rem 0.7rem; border-radius: 8px;
-            border: 1px solid var(--border); color: var(--text);
-            background: white; cursor: pointer;
+        .goog-te-gadget-simple {
+            display: flex !important; align-items: center; gap: 0.4rem;
+            font-family: 'Inter', sans-serif !important; font-size: 0.85rem !important; font-weight: 600 !important;
+            color: var(--text) !important; background: #fff !important; cursor: pointer;
+            border: 1px solid var(--border) !important; border-radius: 8px !important;
+            padding: 0.5rem 0.9rem !important; box-shadow: none !important;
         }
+        .goog-te-gadget-simple .goog-te-gadget-icon { display: none !important; }
+        .goog-te-gadget-simple span { color: var(--text) !important; }
+        .goog-te-gadget-simple::before { content: '🌐'; font-size: 0.95rem; }
         body { top: 0px !important; position: static !important; }
 
         /* ── Buttons ── */
