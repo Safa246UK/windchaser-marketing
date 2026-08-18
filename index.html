@@ -81,6 +81,18 @@
             font-weight: 800; font-size: 1.2rem; color: var(--blue);
         }
         .nav-logo img { width: 32px; height: 32px; }
+        .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+        /* ── Google Translate widget ── */
+        #google_translate_element { display: flex; align-items: center; }
+        .goog-te-gadget { font-family: 'Inter', sans-serif !important; font-size: 0 !important; }
+        .goog-te-gadget .goog-te-combo {
+            font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            padding: 0.45rem 0.7rem; border-radius: 8px;
+            border: 1px solid var(--border); color: var(--text);
+            background: white; cursor: pointer;
+        }
+        body { top: 0px !important; position: static !important; }
 
         /* ── Buttons ── */
         .btn {
@@ -337,7 +349,10 @@
             <img src="https://app.windchaser.info/static/icon-192.png" alt="WindChaser icon">
             WindChaser
         </div>
-        <a href="https://app.windchaser.info" class="btn btn-primary">Open the App →</a>
+        <div class="nav-right">
+            <div id="google_translate_element"></div>
+            <a href="https://app.windchaser.info" class="btn btn-primary">Open the App →</a>
+        </div>
     </div>
 </nav>
 
@@ -346,7 +361,7 @@
     <div class="container">
         <div class="hero-badge">🪁 Personalised kitesurf alerts</div>
         <h1>Only get alerted<br><em>when you can actually ride.</em></h1>
-        <p class="hero-sub">Personalised kitesurf forecast alerts for your favourite UK spots</p>
+        <p class="hero-sub">Personalised kitesurf forecast alerts for your favourite UK and International spots</p>
         <p>Alerts for your spot, your schedule, and your session window. Not every forecast — just the ones that matter to you.</p>
         <div class="hero-cta">
             <a href="https://app.windchaser.info/register" class="btn btn-primary btn-lg">Start free trial →</a>
@@ -508,7 +523,7 @@
                 </div>
                 <div class="screenshot-caption">
                     <strong>🗺️ Kite spots map</strong>
-                    <p>Browse a growing map of community-contributed kite spots around the UK coastline, or add your own favourite beach.</p>
+                    <p>Browse a growing map of community-contributed kite spots around the UK coastline, or add your own favourite beach anywhere in the world.</p>
                 </div>
             </div>
             <div class="screenshot-frame">
@@ -553,7 +568,7 @@
                 <li>7-day forecast with wind, gusts, direction &amp; tides</li>
                 <li>Daily alerts matched to your availability schedule</li>
                 <li>Push notifications + email — your choice</li>
-                <li>Tide data for UK beaches</li>
+                <li>Tide data for UK beaches only</li>
                 <li>Zero ads &nbsp;·&nbsp; zero data selling &nbsp;·&nbsp; ever</li>
             </ul>
             <a href="https://app.windchaser.info/register" class="btn btn-primary btn-lg" style="width: 100%; display: block; text-align: center;">
@@ -600,6 +615,17 @@
         </p>
     </div>
 </footer>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            autoDisplay: false,
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
